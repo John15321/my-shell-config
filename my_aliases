@@ -1,0 +1,46 @@
+# MY_SHELL_CONFIG="~/.my-shell-config"
+INSTANCE_ALIASES="$MY_SHELL_CONFIG/instance_specific_aliases"
+
+if [ ! -e $INSTANCE_ALIASES ]
+then
+    touch $INSTANCE_ALIASES
+    echo "# Here you can put your aliases specific to this machine" >> $INSTANCE_ALIASES
+fi
+
+
+Z="$HOME/.zshrc"
+alias s='source'
+alias sz='s $Z'
+alias oldcat='/bin/cat'
+alias cat='bat'
+alias ls='exa -F'
+alias l='exa --tree -L 1 -l --git --icons -F'
+alias ll='exa --tree -L 2 -l --git --icons -F'
+alias lll='exa --tree -L 3 -l --git --icons -F'
+alias la='l -a'
+alias lla='ll -a'
+alias llla='lll -a'
+alias t='exa --tree -a -l --git --icons'
+alias tree='exa --tree -a -l --git --icons'
+
+# Git aliases
+alias gcr='git clone --recursive'
+
+
+
+
+# [15:03] Hajduk, Tymoteusz
+# [ $# -eq 1 ] && al . || al $1
+
+alias stdpipinstall='pip install -U pip && pip install ipython pytest black black[jupyter] flake8 pynvim matplotlib numpy pandas jupyterlab isort'
+alias flint="isort . -l 88 && black . --line-length 88 && flake8 . --max-line-length 88 --exclude gti-bootstrap.py,'./venv*'"
+alias pipinstallflint='pip install isort black flake8 black black[jupyter]'
+alias wp='which python'
+alias sa='source ./venv/bin/activate'
+alias stdvenvsetup='python -m venv venv && sa && echo "Using: $(wp)" && stdpipinstall && pipinstallflint'
+
+
+if [ -e $INSTANCE_ALIASES ]
+then
+    source $INSTANCE_ALIASES
+fi
