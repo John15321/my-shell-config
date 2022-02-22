@@ -27,17 +27,17 @@ alias tree='exa --tree -a -l --git --icons'
 alias gcr='git clone --recursive'
 
 
-
-
 # [15:03] Hajduk, Tymoteusz
 # [ $# -eq 1 ] && al . || al $1
-
-alias stdpipinstall='pip install -U pip && pip install ipython pytest black black[jupyter] flake8 pynvim matplotlib numpy pandas jupyterlab isort'
+alias stdflintpkgs='isort black flake8 black black[jupyter] pylint mkdocs tox'
+alias stdpipinstall='pip install -U pip && pip install ipython stdflintpkgs pynvim matplotlib numpy pandas jupyterlab isort'
 alias flint="isort . -l 88 && black . --line-length 88 && flake8 . --max-line-length 88 --exclude gti-bootstrap.py,'./venv*'"
-alias pipinstallflint='pip install isort black flake8 black black[jupyter]'
+alias pipinstallflint='pip install stdflintpkgs'
 alias wp='which python'
 alias sa='source ./venv/bin/activate'
-alias stdvenvsetup='python -m venv venv && sa && echo "Using: $(wp)" && stdpipinstall && pipinstallflint'
+alias stdvenvcreate='python -m venv venv && sa && echo "Using: $(wp)"'
+alias stdvenvsetup='stdvenvcreate && stdpipinstall && pipinstallflint'
+alias stdpoetrysetup='stdvenvcreate && poetry shell && poetry add stdflintpkgs'
 
 
 if [ -e $INSTANCE_ALIASES ]
